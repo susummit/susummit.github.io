@@ -1,7 +1,7 @@
 let myImage = document.querySelector('img');
 let index = 0;
 
-myImage.onclick = function() {
+function setImage() {
   let rand = Math.floor(Math.random() * 4);
   if (rand >= index) {
     index = rand + 1;
@@ -34,12 +34,22 @@ function setUserName() {
   }
 }
 
-if(!localStorage.getItem('name')) {
-  setUserName();
-} else {
-  setTitle(localStorage.getItem('name'));
+function main() {
+  /* 每秒变换图片 */
+  setInterval(setImage, 1000);
+
+  /* 初始化用户名 */
+  if(!localStorage.getItem('name')) {
+    setUserName();
+  } else {
+    setTitle(localStorage.getItem('name'));
+  }
+
+  /* 初始化改变用户名的按钮 */
+  myButton.onclick = function() {
+    setUserName();
+  }
+
 }
 
-myButton.onclick = function() {
-  setUserName();
-}
+main();
